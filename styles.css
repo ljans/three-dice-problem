@@ -1,0 +1,82 @@
+:root {
+	--height: 400px;
+	--bar-half-width: 6px;
+}
+
+body {
+	padding: 20px;
+}
+
+#settings {
+	margin-bottom: 30px;
+}
+
+#chart {
+	height: var(--height);
+	background-color: #F3F4F5;
+	display: flex;
+	align-items: flex-end;
+}
+
+#chart > div {
+	padding: 0 var(--bar-half-width);
+	background-color: rgb(28, 52, 147);
+	opacity: 0.8;
+	margin: 0 1px;
+	border-radius: 2px 2px 0 0;
+	height: 0;
+	transition: height ease-out 0.4s;
+}
+
+#chart > div:hover {
+	opacity: 1;
+}
+
+#scale-vertical {
+	width: 60px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: flex-end;
+	height: var(--height);
+	border-right: 1px solid #000;
+}
+
+#scale-vertical .tick {
+	height: 1px;
+	width: 6px;
+	background-color: #000;
+	position: relative;
+}
+
+#scale-vertical .tick::before {
+	content: attr(data-value);
+	display: block;
+	position: absolute;
+	top: -9px;
+	right: 10px;
+}
+
+#scale-horizontal {
+	display: flex;
+	justify-content: space-between;
+	border-top: 1px solid #000;
+	padding: 0 var(--bar-half-width);
+}
+
+#scale-horizontal .tick {
+	width: 1px;
+	height: 6px;
+	background-color: #000;
+	position: relative;
+}
+
+#scale-horizontal .tick::before {
+	content: attr(data-value);
+	display: block;
+	position: absolute;
+	top: 8px;
+	width: 40px;
+	left: -19px;
+	text-align: center;
+}
