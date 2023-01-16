@@ -100,9 +100,21 @@ var compute = function() {
 	base.max = 1/span;
 	for(var i=base.domain[0]; i<=base.domain[1]; i++) base.values[i] = base.max;
 	
-	// Perform the convolution and visualize the result
-	var result = base;
-	for(var i=1; i<convolutionCount.value; i++) result = convolute(result, base);
+	// Prepare convolutions in powers of two
+	var results = [base];	
+	var binary = Number(convolutionCount.value).toString(2);
+	for(i=1; i<binary.length; i++) {
+		var square = convolute(results[results.length - 1], results[results.length - 1]);
+		results.push(square);
+	}
+	
+	// Assemble and visualize the result
+	var result;
+	for(i=binary.length-1; i>=0; i--) {
+		if(binary[binary.length - 1 - i] == '0') continue;
+		if(!result) result = results[i];
+		else result = convolute(result, results[i]);
+	}
 	visualize(result);
 }
 
